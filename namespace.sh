@@ -17,6 +17,10 @@ dwsite="https://dwkoen.ddns.net"
 
 clear
 
+
+echo "           #################################"
+echo "           # DokuWiki: creating  namespace #"
+echo -e "           #################################\n"
 # ask for name of new namespace
 echo "Name of your new namespace (ONLY underscore allowed!):"
 read nsname
@@ -32,8 +36,9 @@ sed -i "s/onderwerp/$nsname/g" $nsdir/$nsname/_template.txt
 mv $nsdir/$nsname/onderwerp.txt $nsdir/$nsname/$nsname.txt
 
 
-
-echo "namespace $nsdir/$nsname created"
-echo "1) use the link underneath to find a picture related to \"$nsname\" and save as icon.jpg on your desktop" 
-echo -e "\thttps://www.google.com/search?as_st=y&tbm=isch&as_q=$nsname&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=ift:jpg"
-echo -e "2) Open $dwsite/doku.php?id=$nsname:$nsname and replace existing icon.jpg with the one from your desktop.\n"
+echo -e "namespace $nsname SUCCESSFULLY created\n"
+echo "1) use the link underneath to find a picture related to \"$nsname\"" 
+echo "   https://www.google.com/search?as_st=y&tbm=isch&as_q=$nsname&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=ift:jpg"
+echo "2) save the picture as: icon.jpg on your desktop" 
+echo -e "3) open a browser: $dwsite/doku.php?id=$nsname:$nsname" 
+echo -e "4) replace the existing icon.jpg with the one on your desktop.\n"
