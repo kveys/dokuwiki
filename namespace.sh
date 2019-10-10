@@ -3,6 +3,7 @@
 # create a new namespace in DokuWiki
 # 
 # Setting variables 
+
 dokudir=/var/www/dokuwiki
 bindir=$dokudir/bin
 nsdir=$dokudir/data/pages
