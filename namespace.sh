@@ -5,6 +5,7 @@
 # Setting variables 
 
 dokudir=/var/www/dokuwiki
+dokuowner="www-data"
 bindir=$dokudir/bin
 nsdir=$dokudir/data/pages
 mediadir=$dokudir/data/media
@@ -17,13 +18,19 @@ currentns=$(find $nsdir -maxdepth 1 -type d ! -name '_template' -printf %f\\n |s
 CreateNamespace(){
 
 # name of new namespace
-echo "Name of your new namespace (ONLY underscore allowed!):"
+echo "Name of the new namespace (ONLY underscore allowed!):"
 read nsname
 
 # copy template files
 cp -R $nsdir/_template $nsdir/$nsname
 mkdir $mediadir/$nsname
 cp $mediadir/dokuwiki/insert-image-icon.jpg $mediadir/$nsname/icon.jpg
+
+# setting permissons on namespace
+chown -R $dokuowner $mediadir/$nsname
+chmod -R 755 $mediadir/$nsname
+chown -R $dokuowner $nsdir
+chmod -R 755 $nsdir
 
 # put name namespace as subject
 sed -i "s/onderwerp/$nsname/g" $nsdir/$nsname/onderwerp.txt
@@ -44,7 +51,7 @@ echo -e "4) replace the existing icon.jpg with the one on your desktop.\n"
 DeleteNamespace(){
 
 # name of new namespace
-echo "Name of your namespace you want to delete:"
+echo "Name of the namespace you want to delete:"
 echo $currentns
 read nsnameD
 
