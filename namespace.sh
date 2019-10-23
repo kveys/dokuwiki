@@ -9,6 +9,7 @@ dokuowner="www-data"
 bindir=$dokudir/bin
 nsdir=$dokudir/data/pages
 mediadir=$dokudir/data/media
+template=_template.txt
 dwsite="https://dwkoen.ddns.net"
 currentns=$(find $nsdir -maxdepth 1 -type d ! -name '_template' -printf %f\\n |sort)
 
@@ -63,6 +64,33 @@ done
 
 }
 
+
+#add a new device
+AddDevice(){
+
+# name of the new device
+echo "Name of the new device?" 
+read devicename
+
+# copy template files
+cp -R $nsdir/configuratie/$template $nsdir/configuratie/$devicename.txt
+sed -i "s/device/$devicename/g"  $nsdir/configuratie/$devicename.txt
+cp -R $nsdir/incident/$template $nsdir/incident/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/incident/$devicename.txt
+cp -R $nsdir/installatie/$template $nsdir/installatie/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/installatie/$devicename.txt
+cp -R $nsdir/changelogs/$template $nsdir/changelogs/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/changelogs/$devicename.txt
+cp -R $nsdir/werkinstructies/$template $nsdir/werkinstructies/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/werkinstructies/$devicename.txt
+
+
+# setting permissons on namespace
+chown -R $dokuowner $nsdir/
+chmod -R 755 $nsdir/
+
+}
+
 ################
 # start script #
 ################
@@ -77,7 +105,8 @@ echo -e "           ##################################\n"
 echo -e "Select the operation:\n"
 echo "1: display current namespaces"
 echo "2: create a new namespace"
-echo -e "3: delete a namespace\n"
+echo "3: delete a namespace"
+echo -e "4: add a new device\n"
 
 read action
 case $action in 
@@ -86,5 +115,7 @@ case $action in
 	"2") CreateNamespace 
 	;;
 	"3") DeleteNamespace
+	;;
+	"4") AddDevice
 	;;
 esac
