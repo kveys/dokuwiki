@@ -1,0 +1,10 @@
+## Sudoers file for dokuwiki administators
+## allowing specific set of commands to be run with root privileges
+##
+## Web Services
+##
+## Nginx service
+Cmnd_Alias NGINXSRV = /bin/systemctl status nginx, /bin/systemctl start nginx, /bin/systemctl stop nginx, /bin/systemctl restart nginx
+
+### Since authentiaction is based on PKI, no password is needed.
+%dokuwiki  ALL=(root)	NOPASSWD: NGINXSRV
