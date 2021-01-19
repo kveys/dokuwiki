@@ -69,7 +69,7 @@ done
 AddDevice(){
 
 # name of the new device
-echo "Name of the new device?" 
+echo "Name of the new device (lowercase characters, only!)?" 
 read devicename
 
 # copy template files
