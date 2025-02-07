@@ -92,11 +92,31 @@ chmod -R 755 $nsdir/
 }
 
 
-#add a new device
+#add a new actrice
 AddActrice(){
 
-}
+# name of the new "actrice"
+echo "Name of the new actrice (lowercase characters, only!)?" 
+read actrice
 
+# copy template files
+cp -R $nsdir/configuratie/$template $nsdir/configuratie/$devicename.txt
+sed -i "s/device/$devicename/g"  $nsdir/configuratie/$devicename.txt
+cp -R $nsdir/incident/$template $nsdir/incident/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/incident/$devicename.txt
+cp -R $nsdir/installatie/$template $nsdir/installatie/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/installatie/$devicename.txt
+cp -R $nsdir/changelogs/$template $nsdir/changelogs/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/changelogs/$devicename.txt
+cp -R $nsdir/werkinstructies/$template $nsdir/werkinstructies/$devicename.txt
+sed -i "s/device/$devicename/g" $nsdir/werkinstructies/$devicename.txt
+
+
+# setting permissons on namespace
+chown -R $dokuowner $nsdir/
+chmod -R 755 $nsdir/
+
+}
 
 
 
