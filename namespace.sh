@@ -91,6 +91,23 @@ chmod -R 755 $nsdir/
 
 }
 
+
+#add a new device
+AddActrice(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 ################
 # start script #
 ################
