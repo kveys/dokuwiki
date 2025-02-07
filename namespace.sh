@@ -100,17 +100,8 @@ echo "Name of the new actrice (lowercase characters, only!)?"
 read actrice
 
 # copy template files
-cp -R $nsdir/configuratie/$template $nsdir/configuratie/$devicename.txt
-sed -i "s/device/$devicename/g"  $nsdir/configuratie/$devicename.txt
-cp -R $nsdir/incident/$template $nsdir/incident/$devicename.txt
-sed -i "s/device/$devicename/g" $nsdir/incident/$devicename.txt
-cp -R $nsdir/installatie/$template $nsdir/installatie/$devicename.txt
-sed -i "s/device/$devicename/g" $nsdir/installatie/$devicename.txt
-cp -R $nsdir/changelogs/$template $nsdir/changelogs/$devicename.txt
-sed -i "s/device/$devicename/g" $nsdir/changelogs/$devicename.txt
-cp -R $nsdir/werkinstructies/$template $nsdir/werkinstructies/$devicename.txt
-sed -i "s/device/$devicename/g" $nsdir/werkinstructies/$devicename.txt
-
+cp -R $nsdir/miamiv/$template $nsdir/miamiv/$actrice.txt
+sed -i "s/actrice/$actrice/g"  $nsdir/miamiv/$actrice.txt
 
 # setting permissons on namespace
 chown -R $dokuowner $nsdir/
@@ -143,7 +134,8 @@ echo -e "Select the operation:\n"
 echo "1: display current namespaces"
 echo "2: create a new namespace"
 echo "3: delete a namespace"
-echo -e "4: add a new device\n"
+echo "4: add a new device"
+echo -e "5: add a new actrice\n"
 
 read action
 case $action in 
@@ -154,5 +146,7 @@ case $action in
 	"3") DeleteNamespace
 	;;
 	"4") AddDevice
+	;;
+	"5") AddActrice
 	;;
 esac
